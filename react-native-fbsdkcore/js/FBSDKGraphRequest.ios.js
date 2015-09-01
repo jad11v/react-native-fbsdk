@@ -108,8 +108,10 @@ class FBSDKGraphRequest {
   /**
    * Starts the Graph API request.
    */
-  start(timeout: ?number) {
-    FBSDKGraphRequestManager.batchRequests([this], null, timeout);
+  start(callback,timeout: ?number) {
+    // FBSDKGraphRequestManager required here to prevent circular dependency issues.
+    var FBSDKGraphRequestManager = require('./FBSDKGraphRequestManager.ios.js');
+    FBSDKGraphRequestManager.batchRequests([this], callback, timeout);
   }
 }
 
